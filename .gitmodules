@@ -1,0 +1,3 @@
+[submodule "TRELLIS"]
+	path = TRELLIS
+	url = https://github.com/microsoft/TRELLIS.git
