@@ -1,0 +1,9 @@
+.selection-hint {
+  background: rgba(20, 20, 35, 0.85);
+  border: 1px solid rgba(77, 166, 255, 0.5);
+  border-radius: 8px;
+  padding: 10px 15px;
+  color: #a0e4cb;
+  font-size: 14px;
+  backdrop-filter: blur(4px);
+}

@@ -1,0 +1,80 @@
+/* src/components/3d/toolbar/toolbar.css */
+
+/* src/components/3d/toolbar/toolbar.css */
+.tool-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tool-group-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a0e4cb;
+  opacity: 0.7;
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+.tool-group-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolbar-container {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: transparent;
+  padding: 14px 10px;
+  pointer-events: auto;
+}
+
+.tool-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(50, 50, 80, 0.8);
+  border: 1px solid rgba(100, 100, 150, 0.3);
+  color: #a0e4cb;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tool-button:hover {
+  background: rgba(77, 166, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(77, 166, 255, 0.2);
+}
+
+.tool-button.active {
+  background: rgba(77, 166, 255, 0.4);
+  border-color: #4da6ff;
+  box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.3);
+}
+
+.tool-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
