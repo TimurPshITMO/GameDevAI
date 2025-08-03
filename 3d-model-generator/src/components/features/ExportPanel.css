@@ -1,0 +1,37 @@
+/* src/components/features/ExportPanel.css */
+.export-panel {
+  background: rgba(20, 20, 35, 0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 20px;
+  border: 1px solid rgba(100, 100, 150, 0.2);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.export-trigger-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(90deg, #ff6b6b, #ffa502);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.export-trigger-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.export-trigger-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.25);
+}

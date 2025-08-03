@@ -2,6 +2,7 @@
 import React from 'react';
 import { ModelViewer } from '../3d';
 import ControlPanel from '../features/ControlPanel';
+import ExportPanel from '../features/ExportPanel';
 
 export default function MainContent() {
 

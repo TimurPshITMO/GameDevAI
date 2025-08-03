@@ -1,13 +1,15 @@
 import React from 'react';
 import ToolButton from './ToolButton';
+import { TbCube3dSphere } from 'react-icons/tb';
 
-export default function SelectionTool({ active, onClick }) {
+export default function SelectionTool({ active, onClick, disabled }) {
   return (
     <ToolButton
-      icon="⊡"
+      icon={TbCube3dSphere}
       active={active}
       onClick={onClick}
-      tooltip="Выделение области (по умолчанию)"
+      disabled={disabled}
+      tooltip="Выделить область"
     />
   );
 }

@@ -2,20 +2,23 @@
 import React from 'react';
 
 export default function ToolButton({ 
-  icon, 
+  icon: Icon,
   active = false, 
   onClick, 
   tooltip = '',
-  size = 40
+  size = 45,
+  disabled = false,
+  style
 }) {
   return (
     <button 
       className={`tool-button ${active ? 'active' : ''}`}
       onClick={onClick}
       title={tooltip}
-      style={{ width: size, height: size }}
+      style={style? style:{ width: size, height: size }}
+      disabled={disabled}
     >
-      {icon}
+      {Icon && <Icon size={20} className="tool-icon" />}
     </button>
   );
 }
