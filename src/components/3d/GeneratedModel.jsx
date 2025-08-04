@@ -43,7 +43,7 @@ export default function GeneratedModel({
     <mesh position={[0,0,0]}>
       <ModelTip>
         <h3>Подождите, модель загружается</h3>
-        <p style={{color:'#a7a7a7'}}>это модет занять некоторое время</p>
+        <p style={{color:'#a7a7a7'}}>это может занять некоторое время</p>
       </ModelTip>
     </mesh>)
   }
