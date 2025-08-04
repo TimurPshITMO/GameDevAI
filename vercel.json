@@ -9,6 +9,7 @@
       "status": 200
     }
   ],
+
   "build": {
     "env": {
       "VITE_API_URL": "https://your-api.example.com"
@@ -19,33 +20,14 @@
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "X-Requested-With, Content-Type"
-        },
-        {
-          "key": "Access-Control-Expose-Headers",
-          "value": "Content-Length"
-        }
-      ]
-    },
-    {
-      "source": "/hdr/(.*)",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/vnd.radiance"
-        }
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With, Content-Type" },
+        { "key": "Access-Control-Expose-Headers", "value": "Content-Length" }
       ]
     }
   ]
-
 }
