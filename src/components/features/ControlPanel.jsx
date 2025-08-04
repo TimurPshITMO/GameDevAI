@@ -27,7 +27,7 @@ export default function ControlPanel({setMainModelPath}) {
         />
       </InputGroup>
       
-      <InputGroup label="Загрузите референс-изображение (опционально)">
+      <InputGroup label="Или референс-изображение">
         <input type="file" accept="image/*" onChange={handleImageUpload} />
         {image && (
           <div className="image-preview">
@@ -39,7 +39,7 @@ export default function ControlPanel({setMainModelPath}) {
       <Slider
         value={details}
         setValue={setDetails}
-        label="Качество (разрешение)"
+        label="Качество (детализация)"
         min={1} max={100}
         barLabels={['низкое', 'высокое']}/>
       

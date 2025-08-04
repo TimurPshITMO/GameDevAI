@@ -9,6 +9,6 @@ export default function handleGeneratingRequest(prompt, details, setIsLoading, s
     setTimeout(() => {
       setIsLoading(false);
       alert('Модель сгенерирована! В реальном проекте здесь будет обработка ответа от API');
-      setMainModelPath('/hello_world2.glb');
+      setMainModelPath(`/hello_world${Math.ceil(Math.random()*3)}.glb`);
     }, 2000);
 }

@@ -8,7 +8,7 @@ export default function handleRegeneratingRequest(postPrompt, setIsLoading, setM
     setTimeout(() => {
       setIsLoading(false);
       alert('Модель перегенерирована! В реальном проекте здесь будет обработка ответа от API');
-      setMainModelPath("/hello_world3.glb");
+      setMainModelPath(`/hello_world${Math.ceil(Math.random()*3)}.glb`);
       clearSelection();
     }, 2000);
 }
