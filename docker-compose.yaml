@@ -4,7 +4,7 @@ services:
   prodmat:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_Base
     image: game_base_gpu
     runtime: nvidia
     container_name: game
