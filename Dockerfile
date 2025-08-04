@@ -13,11 +13,11 @@ RUN apt-get update && \
 RUN pip install --no-cache-dir \
     "opencv-python-headless>=4.8.0,<4.11.0"
 
-
 COPY ./TRELLIS/setup.sh /workspace/setup.sh
 COPY ./install_gpu.py /workspace/install_gpu.py
 COPY ./setup.py /workspace/setup.py
 COPY ./entrypoint.sh /workspace/entrypoint.sh
+
 WORKDIR /workspace
 RUN  chmod +x entrypoint.sh && \
     chmod +x setup.sh && \

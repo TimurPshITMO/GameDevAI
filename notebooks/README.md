@@ -1,3 +1,23 @@
-Установка зависимостей:
-1. sudo docker build -t notebook_inference .
-2. Использую окружение из образа notebook_inference выполните команды из main.ipynb
+# Проект: Запуск модели в Docker+JupyterLab
+
+## Требования
+- nvidia-docker
+- GPU
+
+
+## 🚀 Быстрый старт
+
+### 1. Сборка образа
+```bash
+sudo docker build -t inference .
+```
+
+### 2. Запуск
+```bash
+  sudo docker run -it --gpus all -p 8888:8888 -v $(pwd)/notebooks:/workspace/notebooks inference
+```
+
+
+### 3. Инференс
+Откройте в браузере:  
+🔗 [http://localhost:8888/notebooks/main.ipynb](http://localhost:8888/notebooks/main.ipynb)
