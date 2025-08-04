@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - web-interface
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies and build project
+        run: |
+          cd 3d-model-generator
+          npm install
+          npm run build
+          cd ..
+
+      - name: Prepare GitHub Pages deployment
+        run: |
+          mkdir -p deploy_folder
+          cp -r 3d-model-generator/dist/* deploy_folder/
+          touch deploy_folder/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy_folder
+          publish_branch: web-interface
+          force_orphan: true
+          keep_files: false
