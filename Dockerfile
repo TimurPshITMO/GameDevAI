@@ -19,7 +19,7 @@ COPY ./TRELLIS/setup.sh /workspace/setup.sh
 COPY ./install_gpu.py /workspace/install_gpu.py
 COPY ./setup.py /workspace/setup.py
 COPY ./entrypoint.sh /workspace/entrypoint.sh
-COPY ./model.ipynb /workspace/model.ipynb
+# COPY ./model.ipynb /workspace/model.ipynb
 WORKDIR /workspace
 RUN  chmod +x entrypoint.sh && \
     chmod +x setup.sh && \
