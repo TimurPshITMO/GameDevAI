@@ -28,7 +28,7 @@ export default function GeneratedModel({
       });
     
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={null} preset="sunset">
         <primitive
           object={wireframe?wireframed:gltf.scene}
           position={[0,0,0]}
