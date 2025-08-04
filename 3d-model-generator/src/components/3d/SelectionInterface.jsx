@@ -31,17 +31,6 @@ export default function SelectionInterface({
     const [start, setStart] = useState([0,0,0]);
     const [end, setEnd] = useState([0,0,0]);
 
-
-    // return (
-    //     <mesh position={position} ref={selectionMesh} rotation = {rotation}>
-    //   <boxGeometry args={scale} />
-    //   <meshStandardMaterial 
-    //     color={'#bb2c41ff'}
-    //     metalness={0.2}
-    //     roughness={0.7}
-    //   />
-    // </mesh>);
-
     useEffect(() =>{
         if (controls.current == undefined) return;
 
@@ -65,7 +54,6 @@ export default function SelectionInterface({
 
             case 3:
             case 4:
-                //controls.current.target.set(0,0,0);
                 controls.current.setAzimuthalAngle(Math.PI/2);
                 controls.current.setPolarAngle(Math.PI/2);
                 controls.current.update();
@@ -154,6 +142,7 @@ export default function SelectionInterface({
                 end={end}
                 tipReq={tipReq}
                 setMainModelPath={setMainModelPath}
+                clearSelection={()=>{setSelectionStage(0); setActiveTool('rotate')}}
             />
         )}
         

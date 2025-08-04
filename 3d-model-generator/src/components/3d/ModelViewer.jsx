@@ -114,14 +114,6 @@ export default function ModelViewer({
 
         <GeneratedModel path={mainModelPath} wireframe={materialType == 1}/>
 
-        {/* <mesh position = {[0,0,0]}>
-        <boxGeometry args={[1, 1, 1]}/>
-        <meshStandardMaterial 
-                color={'#51cce4'}
-                opacity={0.8}
-                transparent={true}    
-        /></mesh> */}
-
         <OrbitControls 
           ref={orbitControlsRef}
           minDistance={2} 

@@ -3,7 +3,7 @@ import ModelTip from "./ModelTip";
 import { useState } from "react";
 import { handleRegeneratingRequest } from "../utils";
 
-export default function SelectionBox({start, end, tipReq=false, setMainModelPath}){
+export default function SelectionBox({start, end, tipReq=false, setMainModelPath, clearSelection=()=>0}){
     const position = [
         (end[0]+start[0])/2,
         (end[1]+start[1])/2,
@@ -42,7 +42,7 @@ export default function SelectionBox({start, end, tipReq=false, setMainModelPath
                       </InputGroup>
 
                       <Button
-                          onClick={()=>handleRegeneratingRequest(postPrompt, setIsLoading, setMainModelPath)}
+                          onClick={()=>handleRegeneratingRequest(postPrompt, setIsLoading, setMainModelPath, clearSelection)}
                           disabled={!postPrompt.trim() && !isLoading}
                           loading={isLoading}
                           loadingText='Генерация...'
