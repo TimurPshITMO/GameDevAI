@@ -111,9 +111,9 @@ export default function ModelViewer({
             setMainModelPath={setMainModelPath}
             callback={setClearSelection}
         />
-        <Suspense fallback={null}>
-          <GeneratedModel path={mainModelPath} wireframe={materialType == 1}/>
-        </Suspense>
+
+        <GeneratedModel path={mainModelPath} wireframe={materialType == 1}/>
+
         {/* <mesh position = {[0,0,0]}>
         <boxGeometry args={[1, 1, 1]}/>
         <meshStandardMaterial 
