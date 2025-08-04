@@ -11,19 +11,22 @@ RUN apt-get update && \
 
 
 RUN pip install --no-cache-dir \
-    "opencv-python-headless>=4.8.0,<4.11.0"
+    "opencv-python-headless>=4.8.0,<4.11.0" \
+    jupyterlab
+
 
 COPY ./TRELLIS/setup.sh /workspace/setup.sh
 COPY ./install_gpu.py /workspace/install_gpu.py
 COPY ./setup.py /workspace/setup.py
 COPY ./entrypoint.sh /workspace/entrypoint.sh
-
+COPY ./notebooks/setup_and_inference.ipynb /workspace/setup_and_inference.ipynb
 WORKDIR /workspace
 RUN  chmod +x entrypoint.sh && \
     chmod +x setup.sh && \
     ./setup.sh --basic && \
     rm -f setup.sh
 
+EXPOSE 8888
 
 ENTRYPOINT ["/workspace/entrypoint.sh"]
-CMD ["/bin/bash"]
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
