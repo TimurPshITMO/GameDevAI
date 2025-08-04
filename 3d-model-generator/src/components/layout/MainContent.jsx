@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei';
 
 export default function MainContent() {
 
-  const [mainModelPath, setMainModelPath] = useState("/hello_world.glb")
+  const [mainModelPath, setMainModelPath] = useState("/GameDevAI/hello_world.glb")
 
   return (
     <div className="main-content">

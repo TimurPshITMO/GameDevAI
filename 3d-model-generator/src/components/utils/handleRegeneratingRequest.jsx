@@ -8,6 +8,6 @@ export default function handleRegeneratingRequest(postPrompt, setIsLoading, setM
     setTimeout(() => {
       setIsLoading(false);
       alert('Модель перегенерирована! В реальном проекте здесь будет обработка ответа от API');
-      setMainModelPath("/hello_world.glb");
+      setMainModelPath("https://drive.google.com/uc?export=download&id=150HLl20VCcWoJdRbwE81N0oM-zypOnH0");
     }, 2000);
 }
