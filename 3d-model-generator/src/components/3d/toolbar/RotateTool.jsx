@@ -1,12 +1,10 @@
-import React from 'react';
 import ToolButton from './ToolButton';
-import { TbCube3dSphere } from "react-icons/tb";
-import { PiCubeFocusFill  } from "react-icons/pi";
+import { Md3dRotation } from "react-icons/md";
 
 export default function RotateTool({ active, onClick, disabled }) {
   return (
     <ToolButton
-      icon={PiCubeFocusFill }
+      icon={ Md3dRotation  }
       active={active}
       onClick={onClick}
       disabled={disabled}

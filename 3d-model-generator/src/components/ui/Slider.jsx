@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default function Slider({ label, min = 1, max = 100, defaultValue = 50,  barLabels = []}) {
+export default function Slider({ label, min = 1, max = 100,  barLabels = [], value, setValue}) {
   return (
     <div className="input-group">
       <label>{label}</label>
-      <input type="range" min={min} max={max} defaultValue={defaultValue} />
+      <input type="range" min={min} max={max} value={value} onChange={(e)=>setValue(e.target.value)}/>
       <div className="quality-labels">
-        {barLabels.map(barLabel => (<span>{barLabel}</span>))}
+        {barLabels.map((barLabel, id) => (<span key={`slider_span${id}`}>{barLabel}</span>))}
       </div>
     </div>
   );

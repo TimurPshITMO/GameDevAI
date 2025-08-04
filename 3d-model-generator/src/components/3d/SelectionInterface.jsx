@@ -4,7 +4,15 @@ import * as THREE from 'three';
 import { SelectionBox } from ".";
 import ModelTip from "./ModelTip";
 
-export default function SelectionInterface({controls, selectionStage, setSelectionStage, setActiveTool, callback, tipReq}){
+export default function SelectionInterface({
+    controls,
+    selectionStage,
+    setSelectionStage,
+    setActiveTool,
+    callback,
+    tipReq,
+    setMainModelPath
+}){
 
     // const [scale, setScale] = useState([0,0,0])
     // const [position, setPosition] = useState(new THREE.Vector3(0,0,0))
@@ -36,7 +44,7 @@ export default function SelectionInterface({controls, selectionStage, setSelecti
 
     useEffect(() =>{
         if (controls.current == undefined) return;
-        console.log(controls.current.getAzimuthalAngle(), selectionStage)
+
         switch (selectionStage){
             case 0:
                 controls.current.setAzimuthalAngle(0);
@@ -67,9 +75,6 @@ export default function SelectionInterface({controls, selectionStage, setSelecti
 
     const handleClick = ({point, button}) =>{
         if (button !== 0) return;
-
-        console.log(point)
-        console.log(selectionStage)
 
         switch (selectionStage){
             case 1: {
@@ -143,7 +148,14 @@ export default function SelectionInterface({controls, selectionStage, setSelecti
 
         
 
-        {(selectionStage>0) && (<SelectionBox start={start} end={end} tipReq={tipReq}/>)}
+        {(selectionStage>0) && (
+            <SelectionBox
+                start={start}
+                end={end}
+                tipReq={tipReq}
+                setMainModelPath={setMainModelPath}
+            />
+        )}
         
         </>
     )

@@ -1,19 +1,17 @@
 // src/components/3d/ModelViewer.jsx
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Suspense } from 'react';
 import * as THREE from 'three';
 import { Canvas, useThree } from '@react-three/fiber';
 import { 
   OrbitControls, 
   Environment, 
-  PerspectiveCamera
+  PerspectiveCamera,
 } from '@react-three/drei';
 import GeneratedModel from './GeneratedModel';
 import { 
   Toolbar, 
   ToolGroup,
   SelectionTool, 
-  PanTool, 
-  ZoomTool, 
   RotateTool, 
   UndoTool,
   ExportTool
@@ -22,8 +20,11 @@ import SelectionInterface from './SelectionInterface';
 import ModelTip from './ModelTip';
 import Tip from './Tip';
 import ExportModal from './ExportModal';
+import MaterialTool from './toolbar/MaterialTool';
 
-export default function ModelViewer({ onAreaSelected, disabled = false}) {
+export default function ModelViewer({
+    mainModelPath, setMainModelPath, disabled = false
+}) {
   const [activeTool, setActiveTool] = useState('rotate');
   const [enableRotate, setEnableRotate] = useState(true);
   const orbitControlsRef = useRef();
@@ -32,6 +33,7 @@ export default function ModelViewer({ onAreaSelected, disabled = false}) {
   const [selectionStage, setSelectionStage] = useState(0);
   const [clearSelection, setClearSelection] = useState(()=>0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [materialType, setMaterialType] = useState(0);
 
   const tipHeading =
     (activeTool == 'rotate')?'Контроллер камеры':
@@ -106,10 +108,13 @@ export default function ModelViewer({ onAreaSelected, disabled = false}) {
             setSelectionStage={setSelectionStage}
             setActiveTool={setActiveTool}
             tipReq={(selectionStage == 5) && (! isModalOpen)}
+            setMainModelPath={setMainModelPath}
             callback={setClearSelection}
         />
-        <GeneratedModel position={[0, 0.5, 0]} size={1} />
-        
+        <Suspense fallback={null}>
+          <GeneratedModel path={mainModelPath} wireframe={materialType == 1}/>
+        </Suspense>
+
         <OrbitControls 
           ref={orbitControlsRef}
           minDistance={2} 
@@ -124,6 +129,11 @@ export default function ModelViewer({ onAreaSelected, disabled = false}) {
             active={activeTool === 'rotate'} 
             onClick={() => {setActiveTool('rotate'); setSelectionStage((s)=> s==5? 5:0)}}
             disabled = {disabled}
+          />
+          <MaterialTool
+            materialType={materialType}
+            onClick={() => setMaterialType((prev)=>(prev+1)%2)}
+            disabled={disabled}
           />
         </ToolGroup>
         

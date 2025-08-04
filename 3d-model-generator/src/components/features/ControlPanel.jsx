@@ -2,30 +2,18 @@ import React, { useState } from 'react';
 import InputGroup from '../ui/InputGroup';
 import Slider from '../ui/Slider';
 import Button from '../ui/Button';
+import { handleGeneratingRequest } from '../utils';
 
-export default function ControlPanel() {
+export default function ControlPanel({setMainModelPath}) {
   const [prompt, setPrompt] = useState('');
   const [image, setImage] = useState(null);
-  const [modelStyle, setModelStyle] = useState('realistic');
   const [isLoading, setIsLoading] = useState(false);
+  const [details, setDetails] = useState(75);
   
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
     }
-  };
-  
-  const generateModel = () => {
-    if (!prompt.trim()) return;
-    
-    setIsLoading(true);
-    console.log('Генерация модели с промптом:', prompt);
-    
-    // Здесь будет вызов API для генерации модели
-    setTimeout(() => {
-      setIsLoading(false);
-      alert('Модель сгенерирована! В реальном проекте здесь будет обработка ответа от API');
-    }, 2000);
   };
   
   return (
@@ -48,10 +36,15 @@ export default function ControlPanel() {
         )}
       </InputGroup>
       
-      <Slider label="Качество (разрешение)" min={1} max={100} defaultValue={75} barLabels={['низкое', 'высокое']}/>
+      <Slider
+        value={details}
+        setValue={setDetails}
+        label="Качество (разрешение)"
+        min={1} max={100}
+        barLabels={['низкое', 'высокое']}/>
       
       <Button 
-        onClick={generateModel}
+        onClick={() => handleGeneratingRequest(prompt, details, setIsLoading, setMainModelPath)}
         disabled={!prompt.trim()}
         loading={isLoading}
         loadingText='Генерация...'

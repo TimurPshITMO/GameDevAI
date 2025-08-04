@@ -1,6 +1,6 @@
 import { Html } from "@react-three/drei";
 
-export default function ModelTip({heading,children, distanceFactor=3}){
+export default function ModelTip({heading,children, distanceFactor=4}){
 
     return (
         <Html distanceFactor={distanceFactor}>

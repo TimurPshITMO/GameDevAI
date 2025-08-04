@@ -1,8 +1,9 @@
 import { Button, InputGroup } from "../ui";
 import ModelTip from "./ModelTip";
 import { useState } from "react";
+import { handleRegeneratingRequest } from "../utils";
 
-export default function SelectionBox({start, end, tipReq=false, children}){
+export default function SelectionBox({start, end, tipReq=false, setMainModelPath}){
     const position = [
         (end[0]+start[0])/2,
         (end[1]+start[1])/2,
@@ -16,19 +17,6 @@ export default function SelectionBox({start, end, tipReq=false, children}){
 
     const [postPrompt, setPostPrompt] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
-    const generateModel = () => {
-        if (!postPrompt.trim()) return;
-        
-        setIsLoading(true);
-        console.log('Генерация модели с промптом:', postPrompt);
-        
-        // Здесь будет вызов API для генерации модели
-        setTimeout(() => {
-        setIsLoading(false);
-        alert('Модель сгенерирована! В реальном проекте здесь будет обработка ответа от API');
-        }, 2000);
-    };
     
 
     return (<mesh position = {position}>
@@ -39,14 +27,11 @@ export default function SelectionBox({start, end, tipReq=false, children}){
         <meshStandardMaterial 
                 wireframe={true}
                 color={'#51cce4'}
-                // roughness={0.5}
-                opacity={1}
+                opacity={0.8}
                 transparent={true}    
         />
         {tipReq && (
-            <ModelTip
-                distanceFactor={5}
-            >
+            <ModelTip>
                       <InputGroup label="Редактировать">
                         <textarea
                           value={postPrompt}
@@ -57,8 +42,8 @@ export default function SelectionBox({start, end, tipReq=false, children}){
                       </InputGroup>
 
                       <Button
-                          onClick={generateModel}
-                          disabled={!postPrompt.trim()}
+                          onClick={()=>handleRegeneratingRequest(postPrompt, setIsLoading, setMainModelPath)}
+                          disabled={!postPrompt.trim() && !isLoading}
                           loading={isLoading}
                           loadingText='Генерация...'
                           className={`generate-btn ${isLoading ? 'loading' : ''}`}
