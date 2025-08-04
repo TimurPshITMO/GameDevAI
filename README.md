@@ -14,7 +14,7 @@ sudo docker build -t inference .
 
 ### 2. Запуск
 ```bash
-  sudo docker run -it --gpus all -p 8888:8888 -v $(pwd)/notebooks:/workspace/notebooks inference
+  sudo docker run -it --gpus all -p 8888:8888 -v $(pwd)/:/workspace/notebooks inference
 ```
 
 
