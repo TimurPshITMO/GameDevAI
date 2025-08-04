@@ -1,3 +1,15 @@
+import os
+os.environ['ATTN_BACKEND'] = 'xformers' 
+os.environ['SPCONV_ALGO'] = 'native' 
+import uuid
+import imageio
+from PIL import Image
+import torch
+
+from TRELLIS.trellis.pipelines import TrellisImageTo3DPipeline, TrellisTextTo3DPipeline
+from TRELLIS.trellis.utils import render_utils, postprocessing_utils
+
+
 class MeshGenerator:
     def __init__(self, generation_type: str, model_size: str, seed: int = 42):
         self.seed = seed
@@ -34,43 +46,7 @@ class MeshGenerator:
         return output_path
 
 
-if __name__ == "__main__":
-    import os
-    import shutil
-    import argparse
-
-    os.environ['ATTN_BACKEND'] = 'xformers' 
-    os.environ['SPCONV_ALGO'] = 'native' 
-    import uuid
-    import imageio
-    from PIL import Image
-    import torch
-
-    from TRELLIS.trellis.pipelines import TrellisImageTo3DPipeline, TrellisTextTo3DPipeline
-    from TRELLIS.trellis.utils import render_utils, postprocessing_utils
-
-    GENERATION_PIPELINES = {
-        "image": TrellisImageTo3DPipeline,
-        "text": TrellisTextTo3DPipeline,    
-    }
-    parser = argparse.ArgumentParser(description='test args')
-    parser.add_argument('-i', '--input', required=True, type=argparse.FileType('r'))
-
-    args = parser.parse_args()
-
-    queries = args.input.readlines()
-
-    output_dir = "./generated/"
-    os.makedirs(output_dir, exist_ok=True)
-    
-
-    model = MeshGenerator(generation_type="text", model_size="large")
-
-    for i, prompt in enumerate(queries):
-        print(f'Обработка {i}-го промпта: {prompt}')
-        output_path = "some_path"
-        print(f"Результат генерации: {output_path}")
-
-    print("Создаем архив")
-    shutil.make_archive('generation_results', 'zip', output_dir)
-    print("Архив создан")
+GENERATION_PIPELINES = {
+    "image": TrellisImageTo3DPipeline,
+    "text": TrellisTextTo3DPipeline,
+}

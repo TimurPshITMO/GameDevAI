@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  prodmat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: game_base_gpu
+    runtime: nvidia
+    container_name: game
+    volumes:
+      - /root/side/GameDevAI/:/workspace/project
+    working_dir: /workspace
+    tty: true
+    stdin_open: true

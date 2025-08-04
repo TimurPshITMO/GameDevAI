@@ -1,0 +1,38 @@
+# Имя задания
+name: simple-python-script
+# Описание задания
+desc: Program description
+
+# Параметры точки входа для запуска вычислений
+cmd: >  # многострочная строка YAML
+  python -m main
+   --input ${QUERIES}
+
+# Файлы с входными данными
+inputs:
+  - queries.txt:
+      var: QUERIES
+
+outputs:
+  - generation_results.zip
+
+
+# Параметры окружения
+env:
+  docker: pytorch/pytorch:2.4.0-cuda11.8-cudnn9-devel #cr.yandex/crpas4gdqbq52f2v9ec8/3d:0.0.1 # Docker-образ, доступный в проекте DataSphere
+
+  # python: auto # Полная автоматизация сборки окружения
+  # python: # Параметры окружения задаются вручную. Если параметры не заданы, их значения будут определены из текущего окружения автоматически
+  #   type: manual
+  #   version: 3.10.13 # Версия Python
+
+# Флаги запуска задания
+flags:
+  - attach-project-disk
+# Конфигурации вычислительных ресурсов для запуска задания
+cloud-instance-types:
+  - g1.1 # Конфигурация с вторым приоритетом
+
+
+
+# datasphere project job execute -p ID -c app/config.yaml

@@ -1,0 +1,27 @@
+name: New configuration
+desc: Program description
+cmd: python main.py --input ${QUERIES}
+env:
+  docker:
+    image: cr.yandex/crpas4gdqbq52f2v9ec8/3d_games:0.0.2 #cr.yandex/crpas4gdqbq52f2v9ec8/3d:0.0.1
+    username: oauth
+    password:
+      secret-id: personal
+  python:
+    type: manual
+    version:  3.11.9
+    pip:
+      no-deps: false
+# cwd: /home/be2r/hackathons/games
+flags:
+  - attach-project-disk
+cloud-instance-types:
+  - g1.1
+inputs:
+  - queries.txt:
+      var: QUERIES
+outputs:
+  - generation_results.zip:
+      var: OUTPUTS
+
+
