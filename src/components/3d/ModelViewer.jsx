@@ -100,7 +100,7 @@ export default function ModelViewer({
           castShadow 
           shadow-mapSize={[1024, 1024]}
         />
-        <Environment preset="city" />
+        <Environment files={"/city.hdr"}/>
         
         <SelectionInterface
             controls={orbitControlsRef}

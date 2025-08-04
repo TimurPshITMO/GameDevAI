@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
+import { Environment, Loader, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import ModelTip from './ModelTip';
 
@@ -28,7 +28,7 @@ export default function GeneratedModel({
       });
     
     return (
-      <Suspense fallback={null} preset="sunset">
+      <Suspense fallback={null}>
         <primitive
           object={wireframe?wireframed:gltf.scene}
           position={[0,0,0]}
