@@ -1,6 +1,6 @@
 // src/components/features/ExportPanel.jsx
 import React, { useState } from 'react';
-import ExportModal from '../../components/3d/ExportModal';
+import ExportModal from '../3d/ExportModal';
 import { FiDownload } from 'react-icons/fi';
 
 export default function ExportPanel() {

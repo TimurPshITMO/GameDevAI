@@ -1,0 +1,17 @@
+{
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/index.html",
+      "status": 200
+    }
+  ],
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://your-api.example.com"
+    }
+  }
+}
