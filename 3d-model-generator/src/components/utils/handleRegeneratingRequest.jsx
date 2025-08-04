@@ -8,6 +8,6 @@ export default function handleRegeneratingRequest(postPrompt, setIsLoading, setM
     setTimeout(() => {
       setIsLoading(false);
       alert('Модель перегенерирована! В реальном проекте здесь будет обработка ответа от API');
-      setMainModelPath('/models/chest2.glb');
+      setMainModelPath('hello_world.glb');
     }, 2000);
 }
