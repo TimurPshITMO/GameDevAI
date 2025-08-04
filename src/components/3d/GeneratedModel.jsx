@@ -42,8 +42,8 @@ export default function GeneratedModel({
     return (
     <mesh position={[0,0,0]}>
       <ModelTip>
-        <h3 style={{color:'#ff5252'}}>Не удалось загрузить модель :(</h3>
-        <p style={{color:'#a7a7a7'}}>{err.message}</p>
+        <h3>Подождите, модель загружается</h3>
+        <p style={{color:'#a7a7a7'}}>это модет занять некоторое время</p>
       </ModelTip>
     </mesh>)
   }
