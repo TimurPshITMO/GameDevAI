@@ -19,7 +19,7 @@ sudo docker build -t inference .
 
 
 ### 3. Инференс
-Откройте main.ipynb в JupterLab:  
+Откройте model.ipynb в JupterLab:  
 🔗 [http://localhost:8888](http://localhost:8888/)
 
 ### TRELLIS
