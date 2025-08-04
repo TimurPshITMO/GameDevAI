@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-3d-model-generator/public/models
+public/models
