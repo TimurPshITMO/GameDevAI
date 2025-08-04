@@ -32,7 +32,7 @@ export default function GeneratedModel({
         <primitive
           object={wireframe?wireframed:gltf.scene}
           position={[0,0,0]}
-          scale={1}
+          scale={3}
           castShadow
           receiveShadow
         />
