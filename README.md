@@ -20,4 +20,4 @@ sudo docker build -t inference .
 
 ### 3. Инференс
 Откройте в браузере:  
-🔗 [http://localhost:8888/notebooks/main.ipynb](http://localhost:8888/notebooks/main.ipynb)
+🔗 [http://localhost:8888/main.ipynb](http://localhost:8888/main.ipynb)
