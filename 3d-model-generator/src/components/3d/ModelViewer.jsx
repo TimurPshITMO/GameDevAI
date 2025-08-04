@@ -111,9 +111,16 @@ export default function ModelViewer({
             setMainModelPath={setMainModelPath}
             callback={setClearSelection}
         />
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}>
           <GeneratedModel path={mainModelPath} wireframe={materialType == 1}/>
-        </Suspense>
+        </Suspense> */}
+        <mesh position = {[0,0,0]}>
+        <boxGeometry args={[1, 1, 1]}/>
+        <meshStandardMaterial 
+                color={'#51cce4'}
+                opacity={0.8}
+                transparent={true}    
+        /></mesh>
 
         <OrbitControls 
           ref={orbitControlsRef}
