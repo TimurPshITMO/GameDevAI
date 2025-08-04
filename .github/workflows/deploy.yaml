@@ -1,9 +1,9 @@
-name: Deploy
+name: Deploy React Vite App to GitHub Pages
 
 on:
   push:
     branches:
-      - web-interface
+      - web-interface  # Запускаем при пуше в исходную ветку
 
 permissions:
   contents: write
@@ -27,17 +27,10 @@ jobs:
           npm run build
           cd ..
 
-      - name: Prepare GitHub Pages deployment
-        run: |
-          mkdir -p deploy_folder
-          cp -r 3d-model-generator/dist/* deploy_folder/
-          touch deploy_folder/.nojekyll
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./deploy_folder
-          publish_branch: web-interface
+          publish_dir: ./3d-model-generator/dist
+          publish_branch: gh-pages
           force_orphan: true
-          keep_files: false
