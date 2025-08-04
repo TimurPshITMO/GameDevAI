@@ -19,8 +19,8 @@ sudo docker build -t inference .
 
 
 ### 3. Инференс
-Откройте в браузере:  
-🔗 [http://localhost:8888/main.ipynb](http://localhost:8888/main.ipynb)
+Откройте main.ipynb в JupterLab:  
+🔗 [http://localhost:8888](http://localhost:8888/)
 
 ### TRELLIS
 ```
