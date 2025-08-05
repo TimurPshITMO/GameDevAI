@@ -32,7 +32,8 @@ export default function SelectionBox({start, end, tipReq=false, setMainModelPath
         />
         {tipReq && (
             <ModelTip>
-                      <InputGroup label="Редактировать">
+                      <InputGroup label="">
+                      <label style={{pointerEvents: 'none'}}>Редактировать</label>
                         <textarea
                           value={postPrompt}
                           onChange={(e) => setPostPrompt(e.target.value)}

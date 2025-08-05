@@ -142,7 +142,7 @@ export default function SelectionInterface({
                 end={end}
                 tipReq={tipReq}
                 setMainModelPath={setMainModelPath}
-                clearSelection={()=>{setSelectionStage(0); setActiveTool('rotate')}}
+                clearSelection={()=>{setSelectionStage(0); setActiveTool('rotate'); setStart(0), setEnd(0)}}
             />
         )}
         
