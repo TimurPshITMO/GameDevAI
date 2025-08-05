@@ -9,5 +9,6 @@ export default function handleRegeneratingRequest(postPrompt, setIsLoading, setM
       setIsLoading(false);
       clearSelection();
       alert('К сожалению, функция постредактирования \nеще не реализована в этом интерфейсе\n\n    (｡•́︿•̀｡) ');
-    }, 1000);
+      
+    }, 500);
 }

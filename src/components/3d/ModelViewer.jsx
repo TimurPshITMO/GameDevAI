@@ -21,6 +21,7 @@ import ModelTip from './ModelTip';
 import Tip from './Tip';
 import ExportModal from './ExportModal';
 import MaterialTool from './toolbar/MaterialTool';
+import handleDownload from '../utils/handleDownload';
 
 export default function ModelViewer({
     mainModelPath, setMainModelPath, disabled = false
@@ -159,7 +160,7 @@ export default function ModelViewer({
         <ExportModal 
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-            onExport={handleExport}
+            onExport={()=>handleDownload(mainModelPath)}
         />
     </div>
   );

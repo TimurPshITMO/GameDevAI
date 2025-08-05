@@ -3,11 +3,10 @@ import React, { useRef, useEffect } from 'react';
 import './ExportModal.css';
 
 const EXPORT_FORMATS = [
-  { id: 'glb', name: 'GLB', description: 'Binary GLTF (рекомендуется)', icon: '📦' },
-  { id: 'gltf', name: 'GLTF', description: 'Text-based GLTF', icon: '📄' },
-  { id: 'obj', name: 'OBJ', description: 'Wavefront OBJ', icon: '🔷' },
-  { id: 'stl', name: 'STL', description: 'Stereolithography', icon: '🔺' },
-  { id: 'ply', name: 'PLY', description: 'Polygon File Format', icon: '⬢' }
+  { id: 'glb', name: 'GLB', description: 'Binary GLTF (рекомендуется)', icon: '📦', disabled:false },
+  { id: 'gltf', name: 'GLTF', description: 'Text-based GLTF', icon: '📄',  disabled:true},
+  { id: 'obj', name: 'OBJ', description: 'Wavefront OBJ', icon: '🔷', disabled:true},
+  { id: 'ply', name: 'PLY', description: 'Polygon File Format', icon: '⬢',disabled:true }
 ];
 
 export default function ExportModal({ isOpen, onClose, onExport }) {
@@ -59,6 +58,8 @@ export default function ExportModal({ isOpen, onClose, onExport }) {
                 key={format.id}
                 className="format-option"
                 onClick={() => onExport(format.id)}
+                disabled={format.disabled}
+                style={{pointerEvents: format.disabled?"none":"", opacity: format.disabled?0.5:1}}
               >
                 <span className="format-icon">{format.icon}</span>
                 <div className="format-info">

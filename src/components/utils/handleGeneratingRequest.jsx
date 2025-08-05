@@ -5,13 +5,13 @@ export default async function handleGeneratingRequest(prompt, details, setIsLoad
     
     setIsLoading(true);
  
-    await fetch("http://127.0.0.1:8000/api/generate", {
+    await fetch("http://178.130.63.249:8000/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: prompt, promptType: promptType, quality: details, reference_image: (promptType == 'image')?img64:'' })
     })
     .then(res => res.json())
-    .then(console.log)
+    .then(res =>{console.log(res); setMainModelPath(`http://${res["url"]}`)})
     .catch(console.error)
-    .finally(()=>setIsLoading(false))
+    .finally(()=>{setIsLoading(false)})
 }

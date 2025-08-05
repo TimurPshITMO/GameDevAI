@@ -10,8 +10,10 @@ export default function GeneratedModel({
   wireframe = false
 }) {
 
+
   try {
-    const gltf = useGLTF(path);
+    const gltf = useGLTF(path)
+    useEffect(()=>console.log(path),[path]);
 
     const wireframed = gltf.scene.clone();
 
