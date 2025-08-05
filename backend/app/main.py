@@ -41,14 +41,13 @@ def read_root():
 @app.post("/api/generate", response_model=GenerationResponse)
 async def generate_model(request:GenerationRequest):
     """
-    Генерация 3D-модели на основе текстового промпта и опционального изображения
+    Generate mesh based on text or image prompt
     """
     try:
-        # Проверка качества
-        if not (1 <= request.quality <= 100):
+        if not (500 <= request.quality <= 5000):
             raise HTTPException(
                 status_code=400,
-                detail="Quality must be between 1 and 100"
+                detail="Quality must be between 500 and 5000"
             )
         
         # Обработка изображения, если оно предоставлено
@@ -78,25 +77,18 @@ async def generate_model(request:GenerationRequest):
             with open(file_path, "rb") as img_file:
                 reference_image_data = f"{request.reference_image.content_type};base64,{base64.b64encode(img_file.read()).decode('utf-8')}"
             
-            # Удаляем временный файл
-            os.remove(file_path)
+            # Оставляем файл в качестве лога
+            # os.remove(file_path)
         
         # Генерация модели
-        if reference_image_data:
-            result = generator.generate_from_image(
-                reference_image_data, 
-                prompt=request.prompt, 
-                style=request.style
-            )
-        else:
-            result = generator.generate_from_prompt(
-                request.prompt, 
-                style=request.style, 
-                quality=request.quality
-            )
+        result = generator.generate_from_prompt(
+            prompt = reference_image_data if reference_image_data else request.prompt,
+            prompt_type = 'image' if reference_image_data else 'text',
+            quality = request.quality,
+        )
         
         # Формируем URL (в реальном проекте здесь будет полный URL)
-        model_url = f"/models/{result['model_id']}.{result['format']}"
+        model_url = f"{settings.HOME_URL}/models/{result['model_id']}.{result['format']}"
         
         return GenerationResponse(
             id=result["model_id"],
