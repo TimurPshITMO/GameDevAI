@@ -11,9 +11,17 @@ export default function ControlPanel({setMainModelPath}) {
   const [isLoading, setIsLoading] = useState(false);
   const [details, setDetails] = useState(1200);
   const [promptType, setPromptType] = useState("text");
+
+  const [img64, setImg64] = useState('')
   
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {setImg64(event.target.result);}
+
+      reader.readAsDataURL(e.target.files[0])
+
       setImage(URL.createObjectURL(e.target.files[0]));
       setPromptType('image')
     } else setImage(()=>null)
@@ -67,8 +75,8 @@ export default function ControlPanel({setMainModelPath}) {
         onClick = {()=>setDetails(1200)}/>
       
       <Button 
-        onClick={() => handleGeneratingRequest(prompt, details, setIsLoading, setMainModelPath)}
-        disabled={!prompt.trim()}
+        onClick={() => {handleGeneratingRequest(prompt, details, setIsLoading, setMainModelPath, img64, promptType)}}
+        disabled={!prompt.trim() && !image}
         loading={isLoading}
         loadingText='Генерация...'
         className={`generate-btn ${isLoading ? 'loading' : ''}`}
