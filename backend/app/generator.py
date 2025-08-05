@@ -53,6 +53,7 @@ class MeshGenerator:
 
 
     def generate_from_prompt(self,
+                             model_id,
                              prompt: str,
                              prompt_type: str,
                              quality: int = 1200,
@@ -61,8 +62,7 @@ class MeshGenerator:
         Generate mesh from either text or image prompt
         """
 
-        model_id = str(uuid.uuid4())
-        s_id = f'[{model_id[:2]}...]'
+        s_id = f'[{str(model_id)[:5]}...]'
         print(f"{s_id}    Processing {prompt_type} prompt"+((": " +prompt[:30]) if prompt_type == 'text' else ''))
 
         if (settings.RUN_MODE == "deploy"):

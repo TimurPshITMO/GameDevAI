@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 from typing import Optional, List, Literal
+from fastapi import UploadFile
 
 class GenerationRequest(BaseModel):
-    prompt: str
-    style: Literal["realistic", "cartoon", "low-poly", "artistic"] = "realistic"
-    reference_image: Optional[str] = None  # Base64 encoded image
-    quality: int = 75
-    format: Literal["glb", "gltf", "obj", "stl"] = "glb"
+    prompt: Optional[str] = None
+    promptType: Optional[str] = 'text'
+    reference_image: Optional[str] = ''
+    quality: int
 
 class GenerationResponse(BaseModel):
     id: str

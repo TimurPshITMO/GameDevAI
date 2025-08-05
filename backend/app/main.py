@@ -1,4 +1,5 @@
 import os
+import re
 import uuid
 import base64
 from datetime import datetime
@@ -43,6 +44,8 @@ async def generate_model(request:GenerationRequest):
     """
     Generate mesh based on text or image prompt
     """
+    model_id = uuid.uuid4()
+
     try:
         if not (500 <= request.quality <= 5000):
             raise HTTPException(
@@ -52,38 +55,50 @@ async def generate_model(request:GenerationRequest):
         
         # Обработка изображения, если оно предоставлено
         reference_image_data = None
-        if request.reference_image:
-            # Проверка типа файла
-            if request.reference_image.content_type not in settings.ALLOWED_IMAGE_TYPES:
+        print(request.reference_image)
+        if request.promptType == "image":
+            reference_image_data = request.reference_image
+
+            if not reference_image_data.startswith('data:'):
+                raise HTTPException(
+                    status_code=400,
+                    detail="Unsupported coding"
+                )
+            match = re.match(r'data:(?P<mime>[a-zA-Z0-9]+/[a-zA-Z0-9]+);base64,(?P<data>.+)', reference_image_data)
+            if not match:
+                raise HTTPException(
+                    status_code=400,
+                    detail="Wrong base64"
+                )
+
+            mime_type = match.group('mime')
+            base64_data = match.group('data')
+                
+            if mime_type not in settings.ALLOWED_IMAGE_TYPES:
                 raise HTTPException(
                     status_code=400,
                     detail=f"Unsupported file type. Allowed types: {', '.join(settings.ALLOWED_IMAGE_TYPES)}"
                 )
-            
-            # Проверка размера файла
-            content = await request.reference_image.read()
-            if len(content) > settings.MAX_FILE_SIZE:
-                raise HTTPException(
-                    status_code=400,
-                    detail=f"File size exceeds {settings.MAX_FILE_SIZE/(1024*1024)}MB limit"
-                )
-            
-            # Сохраняем временное изображение
-            file_path = os.path.join(settings.UPLOAD_DIR, f"{uuid.uuid4()}.{request.reference_image.filename.split('.')[-1]}")
-            with open(file_path, "wb") as buffer:
-                buffer.write(content)
-            
-            # Конвертируем в base64 для обработки
-            with open(file_path, "rb") as img_file:
-                reference_image_data = f"{request.reference_image.content_type};base64,{base64.b64encode(img_file.read()).decode('utf-8')}"
-            
-            # Оставляем файл в качестве лога
-            # os.remove(file_path)
+
+            file_path = os.path.join(settings.UPLOAD_DIR, f"{model_id}.{mime_type.split('/')[1]}")
+
+            try:
+                image_data = base64.b64decode(base64_data)
+                with open(file_path, 'wb') as f:
+                    f.write(image_data)
+            except Exception as e:
+                raise RuntimeError(f"Error decoding base64: {str(e)}")
         
+        else:
+            file_path = os.path.join(settings.UPLOAD_DIR, f"{model_id}.txt")
+            with open(file_path, "w") as buffer:
+                buffer.write(request.prompt)
+
         # Генерация модели
         result = generator.generate_from_prompt(
-            prompt = reference_image_data if reference_image_data else request.prompt,
-            prompt_type = 'image' if reference_image_data else 'text',
+            model_id = model_id,
+            prompt = reference_image_data if request.promptType == "image" else request.prompt,
+            prompt_type = request.promptType,
             quality = request.quality,
         )
         
@@ -91,7 +106,7 @@ async def generate_model(request:GenerationRequest):
         model_url = f"{settings.HOME_URL}/models/{result['model_id']}.{result['format']}"
         
         return GenerationResponse(
-            id=result["model_id"],
+            id=str(model_id),
             url=model_url,
             status="completed",
             created_at=datetime.now().isoformat(),
@@ -120,4 +135,4 @@ def get_model(model_id: str, format: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8888)
